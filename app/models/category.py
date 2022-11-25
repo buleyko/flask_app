@@ -1,0 +1,81 @@
+from flask import g
+from app.extensions import db
+from app.vendors.base.model import BaseModel
+from app.vendors.helpers.config import cfg
+from app.vendors.helpers.model import (
+	get_json_by_lang,
+	set_json_by_lang,
+)
+from sqlalchemy.orm import (
+	relationship, 
+	backref,
+)
+from sqlalchemy import (
+	func, 
+	desc,
+)
+from app.vendors.mixins.model import (
+	ValidMixin,
+	TimestampsMixin,
+	ThumbnailMixin,
+)
+
+__all__ = ('Category')
+
+
+
+class Category(BaseModel, ValidMixin, TimestampsMixin, ThumbnailMixin): 
+	__tablename__ = 'categories'
+	
+	id = db.Column(
+		db.Integer, 
+		primary_key=True
+	)
+	_name = db.Column('name',
+		db.JSON, 
+		unique=False,
+		nullable=False,
+	) 
+	_short_desc = db.Column('short_desc',
+		db.JSON, 
+		unique=False, 
+		default = dict,
+	)
+	thumb = db.Column(
+		db.String(255),
+		unique=False,
+		nullable=True,
+	)
+	parent_id = db.Column(
+		db.Integer, 
+		db.ForeignKey('categories.id')
+	)
+	children = relationship(
+		'Category', 
+		backref=backref('parent', remote_side=[id])
+	)
+	articles = relationship(
+		'Article', 
+		back_populates='category'
+	)
+
+	def __repr__(self):
+		return f'Category: {self.name}'
+
+
+	@property
+	def name(self):
+		return get_json_by_lang(self._name)
+	
+	@name.setter
+	def name(self, v):
+		self._name = set_json_by_lang(self._name, v)
+
+	@property
+	def short_desc(self):
+		return get_json_by_lang(self._short_desc)
+		
+	@short_desc.setter
+	def short_desc(self, v):
+		self._short_desc = set_json_by_lang(self._short_desc, v)
+

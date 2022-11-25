@@ -1,0 +1,17 @@
+
+
+
+<input type="text" name="name" value="{{ item.name|default('') }}">
+<small>{{ old_errors.name|default('') }}</small>
+
+<input type="text" name="short_desc" value="{{ item.short_desc|default('') }}">
+<small>{{ old_errors.short_desc|default('') }}</small>
+
+<input type=file name="thumb" multiple>
+<small>{{ old_errors.thumb|default('') }}</small>
+
+<input type="checkbox" id="is_shown" name="is_shown">
+<label for="is_shown">{{ _('Shown') }}</label>
+
+<input type="checkbox" id="is_blocked" name="is_blocked">
+<label for="is_blocked">{{ _('Blocked') }}</label>

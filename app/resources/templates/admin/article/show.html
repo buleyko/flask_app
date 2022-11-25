@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'admin/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ _('Article') }}</h1>
+	<a class="block" href="{{ url_for('admin.article_list') }}">
+		<strong>{{ _('Articles') }}</strong>
+	</a>
+	
+	<strong>{{ article.name }}</strong>
+	<a href="{{ url_for('admin.article_edit', art_id=article.id) }}">
+		{{ _('Edit') }}
+	</a>
+	
+{% endblock %}
+
+{% block footer %}
+	{% include 'admin/partials/footer.html' %}
+{% endblock %}

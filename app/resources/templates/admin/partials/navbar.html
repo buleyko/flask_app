@@ -1,0 +1,8 @@
+<nav id="nav" class="nav">
+	<menu>Admin menu</menu>
+
+	<a href="{{ url_for('prime.home') }}">{{ _('Home') }}</a>
+	{{ user.email }}
+	<a href="{{ url_for('auth.signout') }}">{{ _('SignOut') }}</a>
+	
+</nav>

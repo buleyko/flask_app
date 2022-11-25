@@ -1,0 +1,17 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'admin/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ _('Articles') }}</h1>
+	<a class="block" href="{{ url_for('admin.article_create') }}">{{ _('New') }}</a>
+
+	{% include 'admin/article/partials/items.html' %}
+
+{% endblock %}
+
+{% block footer %}
+	{% include 'admin/partials/footer.html' %}
+{% endblock %}

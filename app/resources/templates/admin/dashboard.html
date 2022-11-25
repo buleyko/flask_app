@@ -1,0 +1,21 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'admin/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	<h1>Dashboard</h1>
+	
+	<a class="block" href="{{ url_for('admin.category_list') }}">
+		<strong>{{ _('Categories') }}</strong>
+	</a>
+	<a class="block" href="{{ url_for('admin.article_list') }}">
+		<strong>{{ _('Articles') }}</strong>
+	</a>
+
+{% endblock %}
+
+{% block footer %}
+	{% include 'admin/partials/footer.html' %}
+{% endblock %}

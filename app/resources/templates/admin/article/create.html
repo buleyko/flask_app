@@ -1,0 +1,24 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'admin/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ _('Create') }}</h1>
+	<a class="block" href="{{ url_for('admin.article_list') }}">
+		<strong>{{ _('Articles') }}</strong>
+	</a>
+	
+	{% set item = old %}
+	<form action="{{ url_for('admin.article_store') }}" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+		{% include 'admin/article/partials/form.html' %}
+		<button type="submit">{{ _('Add') }}</button>
+	</form>
+
+{% endblock %}
+
+{% block footer %}
+	{% include 'admin/partials/footer.html' %}
+{% endblock %}

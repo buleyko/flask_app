@@ -1,0 +1,17 @@
+<nav id="nav" class="nav">
+	<menu>Prime menu</menu>
+
+	{% if user.is_anonymous %}
+		<a href="{{ url_for('auth.signin') }}">{{ _('SignIn') }}</a>
+		<a href="{{ url_for('auth.signup') }}">{{ _('SignUp') }}</a>
+	{% else %}
+		{{ user.email }}
+		<a href="{{ url_for('auth.signout') }}">{{ _('SignOut') }}</a>
+		<a href="{{ url_for('admin.dashboard') }}">{{ _('Dashboard') }}</a>
+	{% endif %}
+
+	<a href="{{ url_for('prime.change_locale', lang='ru') }}">Ru</a> 
+	<a href="{{ url_for('prime.change_locale', lang='en') }}">En</a>
+	<span>{{ current_language }}</span>
+
+</nav>

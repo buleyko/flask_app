@@ -1,0 +1,163 @@
+# Translations template for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-11-25 13:07+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: app/http/blueprints/auth/forms/login.py:32
+#: app/http/blueprints/auth/forms/register.py:35
+msgid "Email"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/login.py:34
+#: app/http/blueprints/auth/forms/login.py:39
+#: app/http/blueprints/auth/forms/register.py:32
+#: app/http/blueprints/auth/forms/register.py:37
+#: app/http/blueprints/auth/forms/register.py:42
+#: app/http/blueprints/auth/forms/register.py:47
+msgid "Field is required"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/login.py:37
+#: app/http/blueprints/auth/forms/register.py:40
+msgid "Password"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/login.py:41
+msgid "Remember Me"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/login.py:42
+#: app/http/blueprints/auth/forms/register.py:51
+msgid "Sign In"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/login.py:46
+#: app/http/blueprints/auth/forms/register.py:55
+msgid "Not valid email"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/login.py:51
+#: app/http/blueprints/auth/forms/register.py:60
+msgid "Not valid password (a-zA-Z0-9!@#$%^&*)"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/register.py:30
+msgid "Username"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/register.py:45
+msgid "Repeat Password"
+msgstr ""
+
+#: app/http/blueprints/auth/forms/register.py:48
+msgid "Passwords are not equal"
+msgstr ""
+
+#: app/http/blueprints/auth/views/auth.py:42
+msgid "Invalid user email or password"
+msgstr ""
+
+#: app/resources/templates/admin/category/create.html:10
+#: app/resources/templates/admin/category/edit.html:10
+#: app/resources/templates/admin/category/list.html:8
+#: app/resources/templates/admin/category/show.html:10
+#: app/resources/templates/admin/dashboard.html:11
+msgid "Categories"
+msgstr ""
+
+#: app/resources/templates/admin/article/create.html:10
+#: app/resources/templates/admin/article/edit.html:10
+#: app/resources/templates/admin/article/list.html:8
+#: app/resources/templates/admin/article/show.html:10
+#: app/resources/templates/admin/dashboard.html:14
+#: app/resources/templates/prime/article/list.html:8
+msgid "Articles"
+msgstr ""
+
+#: app/resources/templates/admin/article/create.html:8
+#: app/resources/templates/admin/category/create.html:8
+msgid "Create"
+msgstr ""
+
+#: app/resources/templates/admin/article/create.html:17
+#: app/resources/templates/admin/category/create.html:17
+msgid "Add"
+msgstr ""
+
+#: app/resources/templates/admin/article/edit.html:8
+#: app/resources/templates/admin/article/edit.html:17
+#: app/resources/templates/admin/article/show.html:15
+#: app/resources/templates/admin/category/edit.html:8
+#: app/resources/templates/admin/category/edit.html:17
+#: app/resources/templates/admin/category/show.html:16
+msgid "Edit"
+msgstr ""
+
+#: app/resources/templates/admin/article/list.html:9
+#: app/resources/templates/admin/category/list.html:9
+msgid "New"
+msgstr ""
+
+#: app/resources/templates/admin/article/show.html:8
+#: app/resources/templates/prime/article/article.html:8
+msgid "Article"
+msgstr ""
+
+#: app/resources/templates/admin/article/partials/form.html:12
+#: app/resources/templates/admin/category/partials/form.html:14
+msgid "Shown"
+msgstr ""
+
+#: app/resources/templates/admin/article/partials/form.html:15
+#: app/resources/templates/admin/category/partials/form.html:17
+msgid "Blocked"
+msgstr ""
+
+#: app/resources/templates/admin/article/partials/items.html:7
+#: app/resources/templates/admin/category/partials/items.html:7
+msgid "Show"
+msgstr ""
+
+#: app/resources/templates/admin/category/show.html:8
+msgid "Category"
+msgstr ""
+
+#: app/resources/templates/admin/partials/navbar.html:4
+msgid "Home"
+msgstr ""
+
+#: app/resources/templates/admin/partials/navbar.html:6
+#: app/resources/templates/prime/partials/navbar.html:9
+msgid "SignOut"
+msgstr ""
+
+#: app/resources/templates/prime/partials/navbar.html:5
+msgid "SignIn"
+msgstr ""
+
+#: app/resources/templates/prime/partials/navbar.html:6
+msgid "SignUp"
+msgstr ""
+
+#: app/resources/templates/prime/partials/navbar.html:10
+msgid "Dashboard"
+msgstr ""
+
+#: app/vendors/utils/validate.py:27
+msgid ","
+msgstr ""
+

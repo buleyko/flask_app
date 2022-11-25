@@ -1,0 +1,30 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'prime/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	<h1>Home page</h1>
+	
+	{% for category, articles_count in categories %}
+		<img width="80" height="80" src="{{ url_for('static', filename=category.thumbUrl) }}">
+		<strong>{{ category.name }}</strong>
+		{% if articles_count %}
+			<span>({{ articles_count }})</span>
+		{% endif %}
+	{% endfor %}
+
+	{% for article in pagination_articles.items %}
+		<strong>{{ article.name }}</strong>
+	{% endfor %}
+
+	{% set pagin = pagination_articles %}
+	{% set pagin_url = 'prime.home' %}
+	{% include 'prime/partials/pagination.html' %}
+
+{% endblock %}
+
+{% block footer %}
+	{% include 'prime/partials/footer.html' %}
+{% endblock %}

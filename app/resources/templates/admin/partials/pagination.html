@@ -1,0 +1,47 @@
+<div class="pagination">
+    {% if pagin.has_prev %}
+        <span>
+            <a class='page-number' 
+            {% if params %}
+                href="{{ url_for(pagin_url, **dict(params, page=pagin.prev_num)) }}"
+            {% else %}
+                href="{{ url_for(pagin_url, page=pagin.prev_num) }}"
+            {% endif %}
+            >
+                {{ '<<<' }}
+            </a>
+        </span>
+    {% endif %}
+
+    {% for number in pagin.iter_pages() %}
+        {% if pagin.page != number %}
+            <span>
+                <a class='page-number'
+                {% if params %}
+                    href="{{ url_for(pagin_url, **dict(params, page=number)) }}"
+                {% else %}
+                    href="{{ url_for(pagin_url, page=number) }}"
+                {% endif %}
+                >
+                {{ number }}
+                </a>
+            </span>
+        {% else %}
+            <span class='current-page-number'>{{ number }}</span>
+        {% endif %}
+    {% endfor %}
+
+    {% if pagin.has_next %}
+        <span>
+            <a class='page-number'
+            {% if params %}
+                href="{{ url_for(pagin_url, **dict(params, page=pagin.next_num)) }}"
+            {% else %}
+                href="{{ url_for(pagin_url, page=pagin.next_num) }}"
+            {% endif %}
+            >
+                {{ '>>>' }}
+            </a>
+        </span>
+    {% endif %}
+</div>

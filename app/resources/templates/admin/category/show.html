@@ -1,0 +1,23 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'admin/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ _('Category') }}</h1>
+	<a class="block" href="{{ url_for('admin.category_list') }}">
+		<strong>{{ _('Categories') }}</strong>
+	</a>
+	
+	{% set category, articles_count = category %}
+	<strong>{{ category.name }}</strong>
+	<a href="{{ url_for('admin.category_edit', cat_id=category.id) }}">
+		{{ _('Edit') }}
+	</a>
+	
+{% endblock %}
+
+{% block footer %}
+	{% include 'admin/partials/footer.html' %}
+{% endblock %}

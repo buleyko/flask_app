@@ -1,0 +1,13 @@
+
+
+{% for category in pagination_categories.items %} 
+	<img width="80" height="80" src="{{ url_for('static', filename=category.thumbUrl) }}">
+	<strong>{{ category.name }}</strong>
+	<a href="{{ url_for('admin.category_show', cat_id=category.id) }}">
+		{{ _('Show') }}
+	</a>
+{% endfor %}
+
+{% set pagin = pagination_categories %}
+{% set pagin_url = 'prime.category_list' %}
+{% include 'admin/partials/pagination.html' %}
