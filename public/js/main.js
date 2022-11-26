@@ -1,11 +1,9 @@
 const csrftoken = document.querySelector('meta[name="csrf-token"]').content
-
 const fetchHeaders = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'X-CSRFToken': csrftoken,
 }
-
 class Logger {
     constructor(options) {
         this.infoMsgPrefix = options.infPref;
@@ -153,11 +151,7 @@ async function fetchAsync(method, url, data) {
 
     const requestOptions = {
         method: method,
-        headers: { 
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken,
-        },
+        headers: fetchHeaders,
         body: JSON.stringify(data)
     };
     try {
@@ -270,38 +264,24 @@ class CssClassManager {
 
 const cssClass = new CssClassManager()
 
-
-class OptionsManager {
-    constructor(options) {
-        this.fetchHeaders = options.fetchHeaders;
-    }
-    setData(data) {
-        return data;
-    }
-    setOptions(optionObj) {
-        const data = this.setData(optionObj)
-        fetch(this.changeUrl, {  
-            method: 'post',  
-            headers: this.fetchHeaders,
-            body: JSON.stringify(data)
-        })
-        .then((response) => {
-            return response.json()
-        })  
-        .then((json) => {
-            console.log('Request succeeded with JSON response', json);  
-        })  
-        .catch(function (error) {  
-            console.log('Request failed', error);  
-        });
-    }
+const setOptions = (optionObj) => {
+    const data = optionObj;
+    fetch('/options/', {  
+        method: 'post',  
+        headers: fetchHeaders,
+        body: JSON.stringify(data)
+    })
+    .then((response) => {
+        return response.json()
+    })  
+    .then((json) => {
+        console.log('Request succeeded with JSON response', json);  
+    })  
+    .catch(function (error) {  
+        console.log('Request failed', error);  
+    });
 }
-
-const options = new OptionsManager({
-    fetchHeaders: fetchHeaders,
-})
-
-theme.serverHandler = options.setOptions
+theme.serverHandler = setOptions
 
 class Observable {
     constructor() {

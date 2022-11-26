@@ -32,14 +32,12 @@ __all__ = (
 @login_required
 def category_list():
 	gate.allow(['access_admin_pages'], 403)
-
 	select_categories = db.select(Category).order_by(desc('created_at'))
 	pagination_categories = db.paginate(select_categories,
 		page=get_current_page(request), 
 		per_page=cfg('NUMBER_PER_PAGE'), 
 		max_per_page=cfg('MAX_PER_PAGE')
 	)
-
 	return render_template('admin/category/list.html',
 		pagination_categories = pagination_categories,
 	)
@@ -80,7 +78,10 @@ def category_store():
 @login_required
 def category_show(cat_id):
 	gate.allow(['access_admin_pages'], 403)
-	select_category = db.select(Category, func.count(Article.id).label('articles_count')).\
+	select_category = db.select(
+			Category, 
+			func.count(Article.id).label('articles_count')
+		).\
 		filter_by(id=cat_id).\
 		outerjoin(Category.articles)
 	try:

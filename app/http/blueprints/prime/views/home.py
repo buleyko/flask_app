@@ -45,7 +45,3 @@ def home():
 		pagination_articles = pagination_articles,
 	)
 
-
-@bp_prime.route('/options/', methods=['POST']) 
-def options():
-	return jsonify({'q':1000})
