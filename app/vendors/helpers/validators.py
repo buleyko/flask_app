@@ -11,6 +11,7 @@ __all__ = (
 	'required_check',
 	'max_len_check',
 	'min_len_check',
+	'array_min_len_check',
 	'unique_check',
 )
 
@@ -67,6 +68,11 @@ def max_len_check(val, *args, **kwargs):
 	return True
 
 def min_len_check(val, *args, **kwargs):
+	if len(val) < int(args[0]):
+		return False
+	return True
+
+def array_min_len_check(val, *args, **kwargs):
 	if len(val) < int(args[0]):
 		return False
 	return True

@@ -55,6 +55,7 @@ def category_create():
 def category_store():
 	gate.allow(['access_admin_pages'], 403)
 	if request.validate.post({
+			'array:array': 'array_min:6',
 			'name': 'required|min:4',
 			'short_desc': 'required|min:10|max:200',
 		}):
@@ -64,12 +65,6 @@ def category_store():
 		# 	is_shown =   True,
 		# )
 		# category.save()
-
-		print(request.form.get('name', ''))
-		print(request.form.get('short_desc', ''))
-		print(request.form.get('is_shown', ''))
-		print(request.form.get('is_blocked', ''))
-
 		return redirect(url_for('admin.category_list'))
 	return render_template('admin/category/create.html')
 

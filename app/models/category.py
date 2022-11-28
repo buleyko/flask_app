@@ -20,7 +20,7 @@ from app.vendors.mixins.model import (
 	ThumbnailMixin,
 )
 
-__all__ = ('Category')
+__all__ = ('Category',)
 
 
 
