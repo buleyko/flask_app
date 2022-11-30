@@ -59,7 +59,7 @@ def validate():
 			'images:array:file': 'array_min:2|required|file_exts:jpg:png',
 		}
 		'''
-		form_values = {}
+		form_values = {key:val for key, val in request.form.items() if key != 'csrf_token'}
 		form_validation_errors = {}
 		is_valid = True
 

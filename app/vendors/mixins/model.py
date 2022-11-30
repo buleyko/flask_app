@@ -4,6 +4,7 @@ from datetime import datetime
 from app.extensions import logger
 from app.vendors.helpers.config import cfg
 from app.vendors.helpers.image import resize_image
+from pathlib import Path
 
 __all__ = ('ValidMixin', 'TimestampsMixin',)
 
@@ -51,18 +52,21 @@ class ThumbnailMixin:
 			file_name = ''
 		):
 		''' Resize image to thumbnail width, 
-			image_file: form.<image_name>.data or request.files[<image_name>] '''
+			image_file: form.<image_name>.data or request.files[<image_name>] ''' 
+		if image_file.filename == '':
+			return None
 		file_ext = image_file.filename.split('.')[-1]
 		if file_ext not in file_allowed_exts:
-			return False
+			return None
 		try:
 			thumb_path = Path(cfg('UPLOAD_PATH_FOLDER')) / ext_path
-			file_name = image_file.filename if not file_name else f'{file_name}.{file_ext}'
-			image_file.save(thumb_path, file_name)
-			new_thumb = resize_image(thumb_path, thumb_size)
-			new_thumb.save(thumb_path)
-			return True
+			filename = image_file.filename if not file_name else f'{file_name}.{file_ext}'
+			img_thumb_path = thumb_path / filename
+			image_file.save(img_thumb_path)
+			new_thumb = resize_image(img_thumb_path, thumb_size)
+			new_thumb.save(img_thumb_path)
+			return str(Path(ext_path) / filename)
 		except:
-			return False
+			return None
 
 

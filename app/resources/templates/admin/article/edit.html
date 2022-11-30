@@ -11,7 +11,7 @@
 	</a>
 
 	{% set item = old|default(article, true) %}
-	<form action="{{ url_for('admin.article_update') }}" method="post" enctype="multipart/form-data">
+	<form action="{{ url_for('admin.article_update', art_id=article.id) }}" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 		{% include 'admin/article/partials/form.html' %}
 		<button type="submit">{{ _('Edit') }}</button>

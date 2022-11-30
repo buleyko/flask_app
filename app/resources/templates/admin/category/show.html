@@ -15,6 +15,9 @@
 	<a href="{{ url_for('admin.category_edit', cat_id=category.id) }}">
 		{{ _('Edit') }}
 	</a>
+	<a href="{{ url_for('admin.category_destroy', cat_id=category.id) }}">
+		{{ _('Delete') }}
+	</a>
 	
 {% endblock %}
 

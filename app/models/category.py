@@ -48,7 +48,8 @@ class Category(BaseModel, ValidMixin, TimestampsMixin, ThumbnailMixin):
 	)
 	parent_id = db.Column(
 		db.Integer, 
-		db.ForeignKey('categories.id')
+		db.ForeignKey('categories.id'),
+		nullable=True,
 	)
 	children = relationship(
 		'Category', 
@@ -78,4 +79,5 @@ class Category(BaseModel, ValidMixin, TimestampsMixin, ThumbnailMixin):
 	@short_desc.setter
 	def short_desc(self, v):
 		self._short_desc = set_json_by_lang(self._short_desc, v)
+
 

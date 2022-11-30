@@ -45,19 +45,3 @@ def home():
 		categories = categories,
 		pagination_articles = pagination_articles,
 	)
-
-
-
-
-# {
-# 'form': ImmutableOrderedMultiDict([(
-# 	'csrf_token', 'ImE1MmY2NTNlZmNjZTZjMzM1NzY1MGM3MmNjYWJlZTkzNmRlMzJmOTIi.Y4Sm2Q.IpZCG7-upVrNEtP9XePTF7dg7yc'), 
-# ('name', 'dfghdfgh'), 
-# ('short_desc', 'dfghdfghdfgh'), 
-# ('array[]', '1'), 
-# ('array[]', '2'), 
-# ('array[][1]', '3'), 
-# ('array[][1][2]', '4')]
-# ), 'files': ImmutableOrderedMultiDict([('thumb', <FileStorage: '' ('application/octet-stream')>)]), 
-# 'host': '127.0.0.1:4040', 
-# 'url': 'http://127.0.0.1:4040/admin/category/store/'}

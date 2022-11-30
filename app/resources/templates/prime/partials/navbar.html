@@ -1,5 +1,6 @@
 <nav id="nav" class="nav">
 	<menu>Prime menu</menu>
+	<a href="{{ url_for('prime.home') }}">{{ _('Home') }}</a>
 
 	{% if user.is_anonymous %}
 		<a href="{{ url_for('auth.signin') }}">{{ _('SignIn') }}</a>

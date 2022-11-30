@@ -6,17 +6,33 @@
 
 {% block content %}
 	<h1>Home page</h1>
+
+	<a class="block" href="{{ url_for('prime.category_list') }}">
+		<strong>{{ _('Categories') }}</strong>
+	</a>
+	<a class="block" href="{{ url_for('prime.article_list') }}">
+		<strong>{{ _('Articles') }}</strong>
+	</a>
 	
+	<h4>{{ _('Categories') }}</h4>
 	{% for category, articles_count in categories %}
 		<img width="80" height="80" src="{{ url_for('static', filename=category.thumbUrl) }}">
 		<strong>{{ category.name }}</strong>
 		{% if articles_count %}
 			<span>({{ articles_count }})</span>
 		{% endif %}
+		<a href="{{ url_for('prime.category_articles', cat_id=category.id) }}">
+			<strong>{{ _('Articles') }}</strong>
+		</a>
 	{% endfor %}
 
+	<h4>{{ _('Articles') }}</h4>
 	{% for article in pagination_articles.items %}
+		<img width="80" height="80" src="{{ url_for('static', filename=article.thumbUrl) }}">
 		<strong>{{ article.name }}</strong>
+		<a href="{{ url_for('prime.article_item', art_id=article.id) }}">
+			<strong>{{ _('Show') }}</strong>
+		</a>
 	{% endfor %}
 
 	{% set pagin = pagination_articles %}

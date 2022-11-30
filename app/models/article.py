@@ -74,7 +74,7 @@ class Article(BaseModel, ValidMixin, TimestampsMixin, ThumbnailMixin):
 
 	@short_desc.setter
 	def short_desc(self, v):
-		self._short_desc = set_json_by_lang(self.short_desc, v)
+		self._short_desc = set_json_by_lang(self._short_desc, v)
 
 
 	def __repr__(self):
@@ -82,7 +82,7 @@ class Article(BaseModel, ValidMixin, TimestampsMixin, ThumbnailMixin):
 
 
 
-class ArticleBody(db.Model):
+class ArticleBody(BaseModel):
 	__tablename__ = 'article_bodies'
 
 	id = db.Column(

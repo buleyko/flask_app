@@ -10,12 +10,38 @@
 		<strong>{{ _('Categories') }}</strong>
 	</a>
 
-	{% set item = old|default(category, true) %}
-	<form action="{{ url_for('admin.category_update') }}" method="post" enctype="multipart/form-data">
+	{#{% set item = old|default(category, true) %}
+	<form action="{{ url_for('admin.category_update', cat_id=category.id) }}" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 		{% include 'admin/category/partials/form.html' %}
 		<button type="submit">{{ _('Edit') }}</button>
+	</form>#}
+
+	<form action="{{ url_for('admin.category_update', cat_id=category.id) }}" method="post" enctype="multipart/form-data">
+		<fieldset>
+			{{ form.hidden_tag() }}
+			{{ form.name.label }}
+			{{ form.name(size=50, class='form-input-field') }}
+			{% for error in form.name.errors %}
+				<span class='form-error-message'>[{{ error }}]</span>
+			{% endfor %}
+			{{ form.thumb.label }}
+			{{ form.thumb(class='form-input-field') }}
+			{{ form.short_desc.label }}
+			{{ form.short_desc(size=50, class='form-input-field') }}
+			{% for error in form.short_desc.errors %}
+				<span class='form-error-message'>[{{ error }}]</span>
+			{% endfor %}
+			{{ form.is_blocked(class='form-check-input') }} 
+			{{ form.is_blocked.label }}
+			{{ form.is_shown(class='form-check-input') }} 
+			{{ form.is_shown.label }}
+			{#{{ form.parent_id.label }}
+			{{ form.parent_id(class='form-input-field') }}#}
+			{{ form.submit(class='submit-btn') }}
+		</fieldset>
 	</form>
+
 
 {% endblock %}
 

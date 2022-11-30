@@ -1,0 +1,26 @@
+{% extends 'basic.html' %}
+
+{% block nav %}
+	{% include 'prime/partials/navbar.html' %}
+{% endblock %}
+
+{% block content %}
+	
+	<h1>{{ _('Article') }}</h1>
+	<a class="block" href="#">
+		<strong>{{ _('Articles or back ???') }}</strong>
+	</a>
+	
+	{% set item, body = article %}<img width="80" height="80" src="{{ url_for('static', filename=item.thumbUrl) }}">
+	<strong>{{ item.name }}</strong>
+
+	<h4>Text</h4>
+	<p>
+		{{ body }}
+	</p>
+	
+{% endblock %}
+
+{% block footer %}
+	{% include 'prime/partials/footer.html' %}
+{% endblock %}

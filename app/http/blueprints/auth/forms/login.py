@@ -10,7 +10,6 @@ from wtforms.validators import (
 	ValidationError, 
 	DataRequired, 
 	Email, 
-	EqualTo, 
 	Length, 
 )
 from wtforms import ( 

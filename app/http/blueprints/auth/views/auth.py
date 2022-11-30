@@ -51,7 +51,9 @@ def signin():
         login_user(curr_user, remember=form.remember_me.data)
         return redirect(_next or url_for('admin.dashboard'))
 
-    return render_template('auth/login.html', form = form)
+    return render_template('auth/login.html', 
+        form = form
+    )
 
 
 @bp_auth.route('/signup/', methods=['GET', 'POST'])
@@ -61,7 +63,9 @@ def signup():
     if form.validate_on_submit():
         signup_signal.send(current_app, username=curr_user.username)
 
-    return render_template('auth/register.html', form = form)
+    return render_template('auth/register.html', 
+        form = form
+    )
 
 
 @bp_auth.route('/signout/', methods=['GET'])

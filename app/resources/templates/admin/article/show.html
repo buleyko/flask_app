@@ -10,10 +10,19 @@
 		<strong>{{ _('Articles') }}</strong>
 	</a>
 	
-	<strong>{{ article.name }}</strong>
-	<a href="{{ url_for('admin.article_edit', art_id=article.id) }}">
+	{% set item, body = article %}<img width="80" height="80" src="{{ url_for('static', filename=item.thumbUrl) }}">
+	<strong>{{ item.name }}</strong>
+	<a href="{{ url_for('admin.article_edit', art_id=item.id) }}">
 		{{ _('Edit') }}
 	</a>
+	<a href="{{ url_for('admin.article_destroy', art_id=item.id) }}">
+		{{ _('Delete') }}
+	</a>
+
+	<h4>Text</h4>
+	<p>
+		{{ body }}
+	</p>
 	
 {% endblock %}
 

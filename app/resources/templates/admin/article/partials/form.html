@@ -2,14 +2,48 @@
 <input type="text" name="name" value="{{ item.name|default('') }}">
 <small>{{ old_errors.name|default('') }}</small>
 
-<input type="text" name="short_desc" value="{{ item.short_desc|default('') }}">
+<textarea name="short_desc">{{ item.short_desc|default('') }}</textarea>
 <small>{{ old_errors.short_desc|default('') }}</small>
 
 <input type=file name="thumb" multiple>
 <small>{{ old_errors.thumb|default('') }}</small>
 
-<input type="checkbox" id="is_shown" name="is_shown">
+<input type="checkbox" id="is_shown" name="is_shown" {% if item.is_shown %} checked {% endif %}>
 <label for="is_shown">{{ _('Shown') }}</label>
 
-<input type="checkbox" id="is_blocked" name="is_blocked">
+<input type="checkbox" id="is_blocked" name="is_blocked" {% if item.is_blocked %} checked {% endif %}>
 <label for="is_blocked">{{ _('Blocked') }}</label>s
+
+<select name="category_id">
+	{% for category in categories  %}
+	<option value="{{ category.id }}" 
+		{% if item.category_id and item.category_id|int == category.id %} selected {% endif %}
+	>
+		{{ category.name }}
+	</option>
+	{% endfor %}
+</select>
+
+<textarea id="summernote" name="body">{{ item.body|default('') }}</textarea>
+
+{% block page_js_script %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+  $('#summernote').summernote({
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 120,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+  });
+</script>
+{% endblock %} 

@@ -1,13 +1,13 @@
 
 
-{% for category in pagination_articles.items %} 
+{% for article in pagination_articles.items %} 
 	<img width="80" height="80" src="{{ url_for('static', filename=article.thumbUrl) }}">
 	<strong>{{ article.name }}</strong>
-	<a href="{{ url_for('admin.article_show', cat_id=article.id) }}">
+	<a href="{{ url_for('admin.article_show', art_id=article.id) }}">
 		{{ _('Show') }}
 	</a>
 {% endfor %}
 
 {% set pagin = pagination_articles %}
-{% set pagin_url = 'prime.article_list' %}
+{% set pagin_url = 'admin.article_list' %}
 {% include 'admin/partials/pagination.html' %}

@@ -3,7 +3,7 @@
 
 flask db init
 flask db migrate
-lask db upgrade 
+flask db upgrade 
 flask user create <mail> <password>
 
 pybabel extract -F babel.cfg -k _l -o app/resources/translations/messages.pot app
