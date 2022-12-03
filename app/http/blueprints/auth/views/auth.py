@@ -21,7 +21,7 @@ from app.events.set.auth import (
     signup_signal, 
     signout_signal, 
 )
-from app.tasks import send_async_email
+# from app.services.celery.tasks import send_email
 from app.models import User
 
 
@@ -65,23 +65,23 @@ def signup():
     ''' Sign in '''
     form = RegisterForm()
     if form.validate_on_submit():
-        signup_signal.send(current_app, username=curr_user.username)
         new_user = User(
             username = form.username.data,
             email = form.email.data,
-            password = generate_password_hash(password),
-            # is_activated = False,
+            password = generate_password_hash(form.password.data),
+            is_activated = False,
         )
         new_user.save()
 
         # try:
         #     # send_async_email.delay(email_data)
-        #     email_data = get_register_mail(to=new_user.email)
-        #     send_async_email.apply_async(
+        #     email_data = get_register_mail(new_user, '/srv/mail/register.html')
+        #     send_email.apply_async(
         #         args=[email_data], 
         #         countdown=60
         #     )
         #     flash(_l(u'Check your mail', category='success'))
+        #     signup_signal.send(current_app, username=new_user.username)
         # except:
         #     flash(_l(u'Email not sent', category='warning'))
 
@@ -106,6 +106,7 @@ def account_activate(uidb64, token):
     if user is not None and check_user_token(user, token):
         user.is_activated = True
         user.save()
+        flash(_l(u'Account activated', category='success'))
         return redirect(url_for('auth.signin'))
     else:
         flash(_l(u'Activation error', category='warning'))

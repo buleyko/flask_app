@@ -6,3 +6,4 @@ from .extensions import configuration_extensions
 from .commands import registration_commands
 from .filters import registration_filters
 from .context import setup_context
+from .services import configuration_services

@@ -31,10 +31,6 @@ logger = logging.getLogger()
 from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect()
 
-# Celery
-from celery import Celery 
-celery = Celery('CeleryApp', broker=cfg('CELERY_BROKER_URL'))
-
 # Mail
-# from flask_mail import Mail
-# mail = Mail()
+from flask_mail import Mail
+mail = Mail()

@@ -11,6 +11,7 @@ from app.factories import (
 	configuration_logger,
 	setup_middlewares,
 	configuration_extensions,
+	configuration_services,
 	registration_commands,
 	registration_filters,
 	setup_context,
@@ -35,5 +36,6 @@ def create_app():
 		setup_context(app, handlers)
 		registration_filters(app)
 		configuration_extensions(app)
+		configuration_services(app)
 		
 	return app

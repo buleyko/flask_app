@@ -4,11 +4,11 @@ from app.extensions import (
 	db, 
 	migrate,
 	csrf,
-	celery, 
-	# mail,
+	mail,
 )
 
 __all__ = ('configuration_extensions',)
+
 
 
 def configuration_extensions(
@@ -18,8 +18,7 @@ def configuration_extensions(
 		db = db,
 		migrate = migrate,
 		csrf = csrf,
-		celery = celery, 
-		# mail = mail,
+		mail = mail,
 	): 
 	""" Configuration of extensions from app.config """
 	db.init_app(app)
@@ -33,7 +32,5 @@ def configuration_extensions(
 	babel.init_app(app)
 
 	csrf.init_app(app)
-	
-	celery.conf.update(app.config)
 
-	# mail.init_app(app)
+	mail.init_app(app)

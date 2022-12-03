@@ -5,6 +5,5 @@ from .extensions import (
 	migrate,
 	logger,
 	csrf,
-	celery,
-	# mail,
+	mail,
 )

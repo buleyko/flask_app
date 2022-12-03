@@ -18,6 +18,7 @@ redis
 brew services start redis
 brew services stop redis
 celery
-celery -A app.services.celery worker -l INFO
+celery -A entry.cel worker -l INFO
+(celery -A app.services.celery worker -l INFO)
 test locale mail server
 python -m smtpd -c DebuggingServer -n localhost:1025

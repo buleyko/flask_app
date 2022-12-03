@@ -18,6 +18,7 @@ __all__ = ('home',)
 
 
 
+
 @bp_prime.route('/', methods=['GET']) 
 def home():
 	select_categories = db.select(
@@ -40,6 +41,7 @@ def home():
 		per_page=cfg('NUMBER_PER_PAGE'), 
 		max_per_page=cfg('MAX_PER_PAGE')
 	)
+
 	return render_template('prime/home.html',
 		categories = categories,
 		pagination_articles = pagination_articles,
