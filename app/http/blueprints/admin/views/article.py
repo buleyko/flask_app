@@ -46,9 +46,7 @@ def article_list():
 @login_required
 def article_create():
 	gate.allow(['access_admin_pages'], 403)
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
+	categories = Category.get_category_form_choices(with_empty=False)
 	return render_template('admin/article/create.html',
 		categories = categories,
 	)
@@ -58,9 +56,7 @@ def article_create():
 @login_required
 def article_store():
 	gate.allow(['access_admin_pages'], 403)
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
+	categories = Category.get_category_form_choices(with_empty=False)
 	if request.validate.post({
 			'name': 'required|min:4',
 			'short_desc': 'required|min:10|max:200',
@@ -119,9 +115,7 @@ def article_show(art_id):
 def article_edit(art_id):
 	gate.allow(['access_admin_pages'], 403)
 	article = db.get_or_404(Article, int(art_id))
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
+	categories = Category.get_category_form_choices(with_empty=False)
 	return render_template('admin/article/edit.html',
 		article = article,
 		categories = categories,
@@ -133,9 +127,7 @@ def article_edit(art_id):
 def article_update(art_id):
 	gate.allow(['access_admin_pages'], 403)
 	article = db.get_or_404(Article, int(art_id))
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
+	categories = Category.get_category_form_choices(with_empty=False)
 	if request.validate.post({
 			'name': 'required|min:4',
 			'short_desc': 'required|min:10|max:200',

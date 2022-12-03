@@ -35,5 +35,5 @@ def create_app():
 		setup_context(app, handlers)
 		registration_filters(app)
 		configuration_extensions(app)
-	
+		
 	return app

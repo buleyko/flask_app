@@ -80,4 +80,14 @@ class Category(BaseModel, ValidMixin, TimestampsMixin, ThumbnailMixin):
 	def short_desc(self, v):
 		self._short_desc = set_json_by_lang(self._short_desc, v)
 
+	# helpers
+	@classmethod
+	def get_category_form_choices(clx, with_empty=True):
+		categories = db.session.execute(
+			db.select(clx).order_by(desc('created_at'))
+		).scalars().all()
+		if with_empty:
+			return [('', '---'), *[(cat.id, cat.name) for cat in categories]]
+		return [(cat.id, cat.name) for cat in categories]
+
 

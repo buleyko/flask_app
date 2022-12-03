@@ -41,7 +41,12 @@ class User(BaseModel, UserMixin, ValidMixin, TimestampsMixin):
 		db.JSON, 
 		unique=False,
 		default = list,
-	) 
+	)
+	is_activated = db.Column(
+		db.Boolean(1), 
+		default=False, 
+		nullable=True,
+	)
 
 	def __repr__(self):
 		return f'User: {self.username}'
@@ -59,4 +64,13 @@ class User(BaseModel, UserMixin, ValidMixin, TimestampsMixin):
 		if not (set(self.permissions) & set(perm_keys)):
 			return False 
 		return True
+
+	@classmethod
+	def get_by_uid(cls, uidb64):
+		try:
+			uid = 1 # force_str(urlsafe_base64_decode(uidb64)) 
+			user = db.session.execute(db.select(cls).filter_by(id=uid)).one()
+		except:
+			user = None
+		return user
 

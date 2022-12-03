@@ -2,7 +2,7 @@ from app.vendors.base.database import (
 	AppModel,
 	AppSession,
 )
-from app.vendors.utils.gate import gate
+from app.vendors.helpers.config import cfg
 
 # Auth
 from flask_login import LoginManager
@@ -32,10 +32,9 @@ from flask_wtf.csrf import CSRFProtect
 csrf = CSRFProtect()
 
 # Celery
-# from celery import Celery 
-# celery = Celery()
-
+from celery import Celery 
+celery = Celery('CeleryApp', broker=cfg('CELERY_BROKER_URL'))
 
 # Mail
-# from flsk mail import mail
-# mail = mail()
+# from flask_mail import Mail
+# mail = Mail()

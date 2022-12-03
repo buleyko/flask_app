@@ -48,38 +48,42 @@ class DevelopmentConfig(Config):
 	NUMBER_PER_PAGE = 15
 	MAX_PER_PAGE = 15
 
+	MAIL_SERVER = 'localhost'
+	MAIL_PORT = 1025
+	MAIL_USE_TLS = False
+	MAIL_USE_SSL = False
+	#MAIL_DEBUG = True
+	MAIL_USERNAME = None
+	MAIL_PASSWORD = None
+	MAIL_DEFAULT_SENDER = 'admin@mail.com'
+	# MAIL_MAX_EMAILS = None
+	# MAIL_SUPPRESS_SEND = True
+	# MAIL_ASCII_ATTACHMENTS = False
 
-
-	# MAIL_SERVER = 'smtp.gmail.com', 
-	# MAIL_PORT = 587,
-	# MAIL_USE_TLS = True, 
-	# MAIL_USE_SSL = False, 
-	# MAIL_USERNAME = '*** mail ***', 
-	# MAIL_PASSWORD = '*** password ***',
-	# ADMINS = ['*** admin@mail.com ***'],
-
-	# CELERY_BROKER_URL = 'redis://0.0.0.0:6379/0'
+	CELERY_BROKER_URL = 'redis://0.0.0.0:6379/0'
 	# CELERY_RESULT_BACKEND = 'redis://0.0.0.0:6379/0'
+	result_backend = 'redis://0.0.0.0:6379/0'
 
-	# broker_transport = 'redis://0.0.0.0:6379/0'
-	# broker = 'redis://0.0.0.0:6379/0'
-	# result_backend = 'redis://0.0.0.0:6379/0'
-	# task_serializer = 'json'
-	# accept_content = ['json',]
+	broker_transport = 'redis://0.0.0.0:6379/0'
+	broker = 'redis://0.0.0.0:6379/0'
+	result_backend = 'redis://0.0.0.0:6379/0'
+	task_serializer = 'json'
+	accept_content = ['json',]
 
-	# task_queues = (
-	# 	Queue('high', Exchange('high'), routing_key='high'), 
-	# 	Queue('normal', Exchange('normal'), routing_key='normal'), 
-	# 	Queue('low', Exchange('low'), routing_key='low'),
-	# ),
-	# task_default_queue = 'normal'
-	# task_default_exchange = 'normal'
-	# task_default_routing_key = 'normal'
-	# task_routes = {
-	# 	# -- HIGH PRIORITY QUEUE -- #
-	# 	# -- NORMAL PRIORITY QUEUE -- # 
-	# 	# -- LOW PRIORITY QUEUE -- #
-	# }
+	task_queues = (
+		Queue('high', Exchange('high'), routing_key='high'), 
+		Queue('normal', Exchange('normal'), routing_key='normal'), 
+		Queue('low', Exchange('low'), routing_key='low'),
+	),
+	task_default_queue = 'normal'
+	task_default_exchange = 'normal'
+	task_default_routing_key = 'normal'
+	task_routes = {
+		# -- HIGH PRIORITY QUEUE -- #
+		# -- NORMAL PRIORITY QUEUE -- # 
+		'app.tasks.mail.send_async_email': {'queue': 'normal'}
+		# -- LOW PRIORITY QUEUE -- #
+	}
 
 	LOG_DIR = 'app/log'
 	LOG_LEVELS = ['info', 'warning', 'error', 'critical']

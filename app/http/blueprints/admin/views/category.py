@@ -52,10 +52,7 @@ def category_list():
 def category_create():
 	gate.allow(['access_admin_pages'], 403)
 	form = CreateCategoryForm()
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
-	form.parent_id.choices = [('', '---'), *[(cat.id, cat.name) for cat in categories]]
+	form.parent_id.choices = Category.get_category_form_choices()
 	return render_template('admin/category/create.html', 
 		form = form,
 	)
@@ -66,11 +63,9 @@ def category_create():
 def category_store():
 	gate.allow(['access_admin_pages'], 403)
 	form = CreateCategoryForm()
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
-	form.parent_id.choices = [('', '---'), *[(cat.id, cat.name) for cat in categories]]
+	form.parent_id.choices = Category.get_category_form_choices()
 	if form.validate_on_submit():
+		thumb = None
 		if form.thumb.data:
 			thumb = Category.resize_thumbnail(form.thumb.data)
 			if thumb is None:
@@ -114,12 +109,8 @@ def category_show(cat_id):
 def category_edit(cat_id):
 	gate.allow(['access_admin_pages'], 403)
 	category = db.get_or_404(Category, int(cat_id))
-	# form = UpdateCategoryForm(obj=category)
-	form = UpdateCategoryForm()
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
-	form.parent_id.choices = [('', '---'), *[(cat.id, cat.name) for cat in categories]]
+	form = UpdateCategoryForm(obj=category)
+	form.parent_id.choices = Category.get_category_form_choices()
 	return render_template('admin/category/edit.html',
 		category = category,
 		form = form,
@@ -131,12 +122,8 @@ def category_edit(cat_id):
 def category_update(cat_id):
 	gate.allow(['access_admin_pages'], 403)
 	category = db.get_or_404(Category, int(cat_id))
-	form = UpdateCategoryForm()
-	# form = UpdateCategoryForm(obj=category)
-	categories = db.session.execute(
-		db.select(Category).order_by(desc('created_at'))
-	).scalars().all()
-	form.parent_id.choices = [('', '---'), *[(cat.id, cat.name) for cat in categories]]
+	form = UpdateCategoryForm(obj=category)
+	form.parent_id.choices = Category.get_category_form_choices()
 	if form.validate_on_submit():
 		thumb = None
 		if form.thumb.data:
