@@ -25,7 +25,7 @@ def get_mail_body(html_template, **kwargs):
 def get_register_mail(user, html_template=None):
 	subject = 'register subject'
 	user_uid_token = '/'.join(get_user_uid_token(user).values())
-	registration_link = f'{request.url}{user_uid_token}'
+	registration_link = f'{request.root_url}auth/account_activate/{user_uid_token}'
 	mail_data = {
 		'sender': cfg('MAIL_DEFAULT_SENDER'),
 		'to': user.email,

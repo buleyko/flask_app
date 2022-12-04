@@ -2,6 +2,7 @@ from flask_login import UserMixin
 from app.vendors.base.model import BaseModel
 from app.extensions import db
 from hashlib import md5
+import base64
 from werkzeug.security import (
 	generate_password_hash, 
 	check_password_hash,
@@ -68,8 +69,8 @@ class User(BaseModel, UserMixin, ValidMixin, TimestampsMixin):
 	@classmethod
 	def get_by_uid(cls, uidb64):
 		try:
-			uid = 1 # force_str(urlsafe_base64_decode(uidb64)) 
-			user = db.session.execute(db.select(cls).filter_by(id=uid)).one()
+			uid = int(eval(base64.b64decode(uidb64))['uid'])
+			user = db.session.execute(db.select(cls).filter_by(id=uid)).scalar_one()
 		except:
 			user = None
 		return user

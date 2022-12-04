@@ -1,26 +1,25 @@
 from six import text_type
+from datetime import datetime
+from app.vendors.helpers.config import cfg
+import base64
+import hashlib
+
+# import hashlib
+# a_string = '1'
+# hashed_string = hashlib.sha256(a_string.encode('utf-8')).hexdigest()
+# print(hashed_string)
 
 def check_user_token(user, token):
-	# check user token
-	return True
+	token_dict = eval(base64.b64decode(token))
+	if token_raw := token_dict.get('token', False):
+		token_parts = token_raw.split(':')
+		return user.id == int(token_parts[0]) and not eval(token_parts[-1])
+	return False
 
 def get_user_uid_token(user):
-	# generate - uid by id and token by user.id timestamp user.is_active
-	uid = 1
-	token = '1q2w3e4r5t'
-	return {'uid': str(uid), 'token':str(token)}
-
-
-
-'''
-from six import text_type
-
-
-class AccountActivationTokenGenerator(PasswordResetTokenGenerator):
-	def _make_hash_value(self, user, timestamp):
-		return (
-			text_type(user.pk) + text_type(timestamp) +
-			text_type(user.is_active)
-		)
-
-'''
+	uid = str({'uid': str(user.id)}).encode('utf-8')
+	base64_uid = base64.b64encode(uid).decode('utf-8')
+	token_raw = f'{str(user.id)}:{str(datetime.timestamp(datetime.now()))}:{str(user.is_activated)}'
+	token = str({'token': token_raw}).encode('utf-8')
+	base64_token = base64.b64encode(token).decode('utf-8')
+	return {'uid': base64_uid, 'token':base64_token}
