@@ -19,3 +19,14 @@ def injects_context(app):
 				'old': None, 
 				'old_errors': None,
 			}
+
+	@app.context_processor
+	def inject_search():
+		try:
+			return { 
+				'search': g.search,
+			}
+		except AttributeError:
+			return { 
+				'search': None, 
+			}

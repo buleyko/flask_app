@@ -22,7 +22,9 @@ class AppSession(Session): # ShardedSession
 	pass
 
 
-
+# engine = create_engine(
+#     "sqlite://",
+#     json_serializer=lambda obj: json.dumps(obj, ensure_ascii=False))
 
 
 # ------------------------------------------------------

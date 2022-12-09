@@ -62,9 +62,7 @@ class User(BaseModel, UserMixin, ValidMixin, TimestampsMixin):
 		return check_password_hash(self.password, password)
 
 	def can(self, perm_keys):
-		if not (set(self.permissions) & set(perm_keys)):
-			return False 
-		return True
+		return set(self.permissions) <= set(perm_keys)
 
 	@classmethod
 	def get_by_uid(cls, uidb64):

@@ -25,3 +25,6 @@ celery -A entry.cel worker -l INFO,
 
 test locale mail server
 python -m smtpd -c DebuggingServer -n localhost:1025,
+
+-------------------------
+not done: search by name

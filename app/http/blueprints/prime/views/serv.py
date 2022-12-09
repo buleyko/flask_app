@@ -1,4 +1,4 @@
-from flask import (request, redirect, session, jsonify,)
+from flask import (request, redirect, session, jsonify, g)
 from app.http.blueprints.prime import bp_prime
 from app.vendors.helpers.config import cfg
 
@@ -15,5 +15,11 @@ def change_locale(lang):
 
 @bp_prime.route('/options/', methods=['POST']) 
 def options():
-	return jsonify({'q':1000})
+	return jsonify({'success':'Stub: change application settings'})
+
+
+@bp_prime.route('/search/', methods=['POST'])
+def search():
+	session[''] = lang
+	return redirect(request.referrer)
 
