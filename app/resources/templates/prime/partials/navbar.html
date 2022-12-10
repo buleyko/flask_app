@@ -15,4 +15,11 @@
 	<a href="{{ url_for('prime.change_locale', lang='en') }}">En</a>
 	<span>{{ current_language }}</span>
 
+	((({{ search_name }})))
+	<form action="{{ url_for('prime.search') }}" method="post">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+		<input type="text" name="search_name" value="{{ search_name|default('') }}">
+		<button type="submit">{{ _('Search') }}</button>
+	</form>
+
 </nav>

@@ -1,4 +1,4 @@
-from flask import g
+from flask import (session, g,)
 
 
 __all__ = ('injects_context', )
@@ -24,9 +24,10 @@ def injects_context(app):
 	def inject_search():
 		try:
 			return { 
-				'search': g.search,
+				# 'search_name': g.search,
+				'search_name': session['search_name'],
 			}
-		except AttributeError:
+		except (KeyError, AttributeError):
 			return { 
-				'search': None, 
+				'search_name': None, 
 			}

@@ -32,10 +32,23 @@ def home():
 		limit(cfg('CATEGORIES_ON_HOMEPAGE'))
 	categories = db.session.execute(select_categories).all()
 
+	# select_articles = db.select(
+	# 		Article
+	# 	).\
+	# 	filter_by(is_blocked=False).filter_by(is_shown=True).\
+	# 	filter(Article._name.comparator.contains('Zxcv')).\
+	# 	distinct()
+
 	select_articles = db.select(
 			Article
 		).\
 		filter_by(is_blocked=False).filter_by(is_shown=True)
+	if search_name := session.get('search_name', None):
+		select_articles = select_articles.filter(
+			Article._name.comparator.contains(search_name.strip())
+		)
+	select_articles = select_articles.distinct()
+
 	pagination_articles = db.paginate(select_articles,
 		page=get_current_page(request), 
 		per_page=cfg('NUMBER_PER_PAGE'), 

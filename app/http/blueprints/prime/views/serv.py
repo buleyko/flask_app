@@ -20,6 +20,9 @@ def options():
 
 @bp_prime.route('/search/', methods=['POST'])
 def search():
-	session[''] = lang
+	session.pop('search_name', default=None)
+	if search_value := request.form.get('search_name', None):
+		session['search_name'] = search_value
+		# g.search = search_value
 	return redirect(request.referrer)
 

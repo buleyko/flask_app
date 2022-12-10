@@ -19,7 +19,7 @@ def check_user_token(user, token):
 def get_user_uid_token(user):
 	uid = str({'uid': str(user.id)}).encode('utf-8')
 	base64_uid = base64.b64encode(uid).decode('utf-8')
-	token_raw = f'{str(user.id)}:{str(datetime.timestamp(datetime.now()))}:{cfg('SECRET_KEY')}:{str(user.is_activated)}'
+	token_raw = f'{str(user.id)}:{str(datetime.timestamp(datetime.now()))}:{cfg("SECRET_KEY")}:{str(user.is_activated)}'
 	token = str({'token': token_raw}).encode('utf-8')
 	base64_token = base64.b64encode(token).decode('utf-8')
 	return {'uid': base64_uid, 'token':base64_token}
