@@ -43,7 +43,7 @@ def home():
 			Article
 		).\
 		filter_by(is_blocked=False).filter_by(is_shown=True)
-	if search_name := session.get('search_name', None):
+	if search_name := session.get('search_name', False):
 		select_articles = select_articles.filter(
 			Article._name.comparator.contains(search_name.strip())
 		)

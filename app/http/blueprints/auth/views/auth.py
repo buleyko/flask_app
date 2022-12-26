@@ -104,7 +104,6 @@ def signout():
 @bp_auth.route('/account_activate/<uidb64>/<token>/', methods=['GET'])
 def account_activate(uidb64, token):
     user = User.get_by_uid(uidb64)
-    print(user)
     print(check_user_token(user, token))
     if user is not None and check_user_token(user, token):
         user.is_activated = True

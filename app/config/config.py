@@ -15,7 +15,7 @@ class DevelopmentConfig(Config):
 	DEBUG = env.get('DEBUG', False)
 	SECRET_KEY = '*** change me please ***'
 
-	SQLALCHEMY_DATABASE_URI = env.get('SQLITE_DATABASE_URI', 'sqlite:///test_db.sqlite3')
+	SQLALCHEMY_DATABASE_URI = env.get('SQLITE_DATABASE_URI', None)
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 	LOGIN_VIEW = 'auth.signin'

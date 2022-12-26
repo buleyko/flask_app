@@ -21,6 +21,7 @@ __all__ = (
 )
 
 
+
 @bp_prime.route('/article/list/', methods=['GET']) 
 def article_list():
 	select_articles = db.select(
@@ -35,6 +36,7 @@ def article_list():
 	return render_template('prime/article/list.html',
 		pagination_articles = pagination_articles,
 	)
+
 
 @bp_prime.route('/article/<int:art_id>/item/', methods=['GET']) 
 def article_item(art_id):

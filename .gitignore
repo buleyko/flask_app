@@ -7,6 +7,6 @@
 
 .env
 
-flask_blog_test_db.sqlite3
+flask_test_db.sqlite3
 
 info.txt

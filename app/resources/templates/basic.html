@@ -14,6 +14,10 @@
         <title>Title</title> 
         <meta name="description" content="">
         <meta name="keywords" content="">
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" 
+        crossorigin="anonymous"></script>
     </head>
     <body> 
         {% include 'messages.html' %}
@@ -24,6 +28,7 @@
         </main>
         {% block footer %}{% endblock %}
         <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
         {% block page_js_script %}{% endblock %} 
     </body>
 </html>

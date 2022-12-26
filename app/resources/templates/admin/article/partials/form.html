@@ -15,11 +15,11 @@
 <label for="is_blocked">{{ _('Blocked') }}</label>s
 
 <select name="category_id">
-	{% for category in categories  %}
-	<option value="{{ category.id }}" 
-		{% if item.category_id and item.category_id|int == category.id %} selected {% endif %}
+	{% for id, name in categories  %}
+	<option value="{{ id }}" 
+		{% if item.category_id and item.category_id|int == id %} selected {% endif %}
 	>
-		{{ category.name }}
+		{{ name }}
 	</option>
 	{% endfor %}
 </select>
@@ -27,11 +27,34 @@
 <textarea id="summernote" name="body">{{ item.body|default('') }}</textarea>
 
 {% block page_js_script %}
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script>
-  $('#summernote').summernote({
+const uploadCsrftoken = document.querySelector('meta[name="csrf-token"]').content
+const imageUploadfetchHeaders = {
+    'X-CSRFToken': uploadCsrftoken,
+}
+function uploadImage(image) {
+    let formData = new FormData();
+    formData.append("image", image);
+    fetch('/upload-article-image/', {
+      method: 'POST',
+      headers: imageUploadfetchHeaders,
+      body: formData,
+    })
+    .then((response) => response.json())
+    .then((result) => {
+        console.log(result['img']);
+        const image_url = result['img']
+        var image = $('<img>').attr('src', image_url);
+        $('#summernote').summernote("insertNode", image[0]);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}  
+$('#summernote').summernote({
     placeholder: 'Hello stand alone ui',
     tabsize: 2,
     height: 120,
@@ -43,7 +66,14 @@
       ['table', ['table']],
       ['insert', ['link', 'picture', 'video']],
       ['view', ['fullscreen', 'codeview', 'help']]
-    ]
-  });
+    ],
+    callbacks: {
+        onImageUpload: function(image) {
+            uploadImage(image[0]);
+        }
+    }
+});
+
+
 </script>
 {% endblock %} 

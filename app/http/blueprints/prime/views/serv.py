@@ -3,7 +3,7 @@ from app.http.blueprints.prime import bp_prime
 from app.vendors.helpers.config import cfg
 
 
-__all__ = ('change_locale', 'options',)
+__all__ = ('change_locale', 'options', 'article_image_upload',)
 
 
 
@@ -26,3 +26,10 @@ def search():
 		# g.search = search_value
 	return redirect(request.referrer)
 
+
+from app.models import Article
+@bp_prime.route('/upload-article-image/', methods=['POST']) 
+def article_image_upload():
+	image_path = Article.upload_body_image(request.files['image'])
+	print(image_path)
+	return jsonify({'img':image_path})
